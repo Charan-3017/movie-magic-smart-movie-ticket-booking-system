@@ -1,0 +1,97 @@
+<!-- ✅ home1.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Movie Magic - Now Showing</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body { background-color: #000; color: #fff; font-family: 'Segoe UI', sans-serif; }
+    .movie-grid { display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; margin-top: 30px; }
+    .movie-card { width: 280px; background-color: #111; border-radius: 10px; overflow: hidden; box-shadow: 0 4px 6px rgba(0,0,0,0.5); transition: transform 0.3s; }
+    .movie-card:hover { transform: scale(1.05); }
+    .movie-card img { width: 100%; height: 340px; object-fit: cover; }
+    .movie-card-body { padding: 15px; }
+    .movie-title { font-size: 20px; font-weight: bold; }
+    .movie-details { font-size: 14px; color: #ccc; margin-bottom: 10px; }
+    .btn-book { background-color: #e50914; border: none; }
+    .search-box { width: 300px; margin: 20px auto; text-align: center; }
+    .pagination { justify-content: center; margin: 30px 0; }
+  </style>
+</head>
+<body>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="{{ url_for('home1') }}">🎬 Movie Magic</a>
+      <div class="collapse navbar-collapse justify-content-end">
+        <ul class="navbar-nav">
+          <li class="nav-item"><span class="nav-link disabled">Hi, {{ session['user']['name'] }}!</span></li>
+          <li class="nav-item"><a class="nav-link" href="{{ url_for('profile') }}">👤 Profile</a></li>
+          <li class="nav-item"><a class="nav-link" href="{{ url_for('user_bookings') }}">🎟️ My Bookings</a></li>
+          <li class="nav-item"><a class="nav-link" href="{{ url_for('contact') }}">📞 Contact Support</a></li>
+          <li class="nav-item"><a class="nav-link text-warning" href="{{ url_for('logout') }}">🚪 Logout</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <h1 class="text-center mt-4">🎬 Now Showing</h1>
+  <div class="search-box">
+    <input type="text" id="searchInput" class="form-control" placeholder="Search movies...">
+  </div>
+
+  <div class="container">
+    <div class="movie-grid" id="movieList">
+      {% for movie in movies %}
+        <div class="movie-card" data-title="{{ movie.title|lower }}" data-genre="{{ movie.genre|lower }}">
+          <img src="{{ url_for('static', filename='posters/' ~ movie.poster) }}" alt="{{ movie.title }}">
+          <div class="movie-card-body">
+            <div class="movie-title">{{ movie.title }}</div>
+            <div class="movie-details">{{ movie.genre }} | {{ movie.language }}<br>{{ movie.duration }} | ₹{{ movie.price }}</div>
+            <a href="{{ url_for('select_datetime', movie_id=movie.id) }}" class="btn btn-book btn-sm text-white">Book Now</a>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+    <nav><ul class="pagination" id="pagination"></ul></nav>
+  </div>
+
+  <script>
+    const itemsPerPage = 6;
+    const movies = [...document.querySelectorAll('.movie-card')];
+    const pagination = document.getElementById('pagination');
+    const searchInput = document.getElementById('searchInput');
+
+    function paginate(currentPage = 1) {
+      let filtered = movies.filter(card => card.style.display !== 'none');
+      let totalPages = Math.ceil(filtered.length / itemsPerPage);
+      pagination.innerHTML = '';
+
+      for (let i = 1; i <= totalPages; i++) {
+        const li = document.createElement('li');
+        li.className = 'page-item' + (i === currentPage ? ' active' : '');
+        li.innerHTML = `<a class="page-link" href="#">${i}</a>`;
+        li.onclick = () => paginate(i);
+        pagination.appendChild(li);
+      }
+
+      filtered.forEach((card, index) => {
+        card.style.display = (index >= (currentPage - 1) * itemsPerPage && index < currentPage * itemsPerPage) ? 'block' : 'none';
+      });
+    }
+
+    searchInput.addEventListener('input', () => {
+      const value = searchInput.value.toLowerCase();
+      movies.forEach(card => {
+        const title = card.getAttribute('data-title');
+        const genre = card.getAttribute('data-genre');
+        card.style.display = title.includes(value) || genre.includes(value) ? 'block' : 'none';
+      });
+      paginate(1);
+    });
+
+    paginate();
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

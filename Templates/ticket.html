@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Ticket Confirmation - Movie Magic</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body {
+      background-color: #000;
+      color: #fff;
+      padding-top: 40px;
+    }
+    .ticket-card {
+      max-width: 700px;
+      margin: auto;
+      background-color: #111;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+    }
+    .qr-code {
+      margin-top: 20px;
+    }
+    .btn-group {
+      margin-top: 30px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="ticket-card text-center">
+    <h2>🎟️ Movie Ticket Confirmation</h2>
+    <hr class="text-light">
+
+    <p><strong>Booking ID:</strong> {{ booking.booking_id }}</p>
+    <p><strong>Movie:</strong> {{ booking.movie }}</p>
+    <p><strong>Theater:</strong> {{ booking.theater }}</p>
+    <p><strong>Seats:</strong> {{ booking.seats | join(', ') }}</p>
+    <p><strong>Total Price:</strong> ₹{{ booking.total_price }}</p>
+    <p><strong>Booking Time:</strong> {{ booking.booking_time }}</p>
+
+    <div class="text-center mt-4">
+    <h5>Scan Your Ticket QR Code</h5>
+    <img src="{{ qr_image }}" alt="QR Code" class="img-fluid" style="width: 150px;">
+</div>
+
+    <div class="btn-group d-flex justify-content-around flex-wrap mt-4">
+      <a href="{{ url_for('download_ticket', booking_id=booking.booking_id) }}" class="btn btn-success">⬇️ Download PDF</a>
+      <a href="{{ url_for('home1') }}" class="btn btn-primary">🏠 Back to Home</a>
+      <a href="{{ url_for('logout') }}" class="btn btn-danger">🔓 Logout</a>
+    </div>
+    
+
+  </div>
+
+</body>
+</html>

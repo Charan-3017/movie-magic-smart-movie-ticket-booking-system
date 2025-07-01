@@ -1,0 +1,26 @@
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Select Date - Movie Magic</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body { background-color: #000; color: #fff; font-family: 'Segoe UI', sans-serif; }
+    .date-btn { margin: 10px; padding: 15px 25px; font-size: 18px; border: 2px solid #e50914; background: transparent; color: #fff; }
+    .date-btn:hover { background-color: #e50914; }
+  </style>
+</head>
+<body>
+  <div class="container text-center mt-5">
+    <h2>Select Date for <span class="text-danger">{{ movie.title }}</span></h2>
+    <form method="POST" action="{{ url_for('show_times', movie_id=movie.id) }}">
+      <input type="hidden" name="movie_id" value="{{ movie.id }}">
+      <div class="d-flex flex-wrap justify-content-center mt-4">
+        {% for i in range(7) %}
+          {% set date = (now + timedelta(days=i)).strftime('%Y-%m-%d') %}
+          <button type="submit" class="btn btn-outline-light date-btn" name="date" value="{{ date }}">{{ date }}</button>
+        {% endfor %}
+      </div>
+    </form>
+  </div>
+</body>
+</html>
