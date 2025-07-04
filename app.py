@@ -30,7 +30,7 @@ movies = [
 
 @app.route('/')
 def index():
-    return render_template('welcome.html')  # ✅ Renders the welcome page
+    return render_template('welcome.html')
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
@@ -38,7 +38,7 @@ def login():
         email = request.form.get('email')
         password = request.form.get('password')
         remember = request.form.get('remember')
-        response = users_table.get_item(Key={'Email': email})
+        response = users_table.get_item(Key={'email': email})
         user = response.get('Item')
         if user and user['Password'] == password:
             session['user'] = email
@@ -54,10 +54,10 @@ def register():
         email = request.form.get('email')
         password = request.form.get('password')
         phone = request.form.get('phone')
-        response = users_table.get_item(Key={'Email': email})
+        response = users_table.get_item(Key={'email': email})
         if 'Item' in response:
             return render_template('register.html', error='User already exists')
-        users_table.put_item(Item={'Email': email, 'Password': password, 'Phone': phone})
+        users_table.put_item(Item={'email': email, 'Password': password, 'Phone': phone})
         return redirect(url_for('login'))
     return render_template('register.html')
 
@@ -122,7 +122,7 @@ def contact():
 def forgot():
     if request.method == 'POST':
         email = request.form.get('email')
-        response = users_table.get_item(Key={'Email': email})
+        response = users_table.get_item(Key={'email': email})
         user = response.get('Item')
         if user:
             code = random.randint(1000, 9999)
@@ -150,7 +150,7 @@ def reset_password():
         new_pass = request.form.get('password')
         email = session.get('reset_email')
         users_table.update_item(
-            Key={'Email': email},
+            Key={'email': email},
             UpdateExpression='SET Password = :p',
             ExpressionAttributeValues={':p': new_pass}
         )
