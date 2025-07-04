@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Help & FAQ | Movie Magic</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <style>
+    body {
+      background: radial-gradient(circle, #1f1c2c, #928dab);
+      color: white;
+    }
+    .faq-box {
+      margin-top: 70px;
+      background-color: #181818;
+      padding: 2.5rem;
+      border-radius: 15px;
+      box-shadow: 0 0 25px rgba(255, 255, 255, 0.1);
+    }
+    h2 {
+      color: #00e0ff;
+    }
+    .accordion-button {
+      background-color: #2c2c2c;
+      color: #fff;
+    }
+    .accordion-button:not(.collapsed) {
+      background-color: #00bcd4;
+    }
+    .accordion-body {
+      background-color: #222;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="faq-box">
+      <h2 class="text-center mb-4">❓ Need Help? We're Here!</h2>
+      <div class="accordion" id="faqAccordion">
+
+        <div class="accordion-item">
+          <h2 class="accordion-header">
+            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#q1">
+              💳 How can I book a ticket?
+            </button>
+          </h2>
+          <div id="q1" class="accordion-collapse collapse show" data-bs-parent="#faqAccordion">
+            <div class="accordion-body">
+              Simply log in, choose your movie, select tickets, and hit "Book Now"!
+            </div>
+          </div>
+        </div>
+
+        <div class="accordion-item">
+          <h2 class="accordion-header">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#q2">
+              🧠 I forgot my password. What should I do?
+            </button>
+          </h2>
+          <div id="q2" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+            <div class="accordion-body">
+              Use the "Forgot Password" link on the login page. We'll send a code to your email.
+            </div>
+          </div>
+        </div>
+
+        <div class="accordion-item">
+          <h2 class="accordion-header">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#q3">
+              📩 How do I contact support?
+            </button>
+          </h2>
+          <div id="q3" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+            <div class="accordion-body">
+              Visit our <a href="/contact_us" class="text-info">Contact Us</a> page to send us a message.
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

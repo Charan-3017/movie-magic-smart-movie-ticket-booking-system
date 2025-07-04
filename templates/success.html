@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Booking Success - Movie Magic</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <style>
+        body {
+            background-color: #0f0f0f;
+            font-family: 'Segoe UI', sans-serif;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+        .confirmation {
+            background-color: #1a1a1a;
+            padding: 30px;
+            border-radius: 25px;
+            text-align: center;
+            box-shadow: 0 0 25px #00ffcc;
+            width: 400px;
+        }
+        .confirmation h2 {
+            color: #00ffcc;
+            font-size: 28px;
+            margin-bottom: 20px;
+        }
+        .btn {
+            margin-top: 25px;
+            background-color: #ff4da6;
+            color: white;
+            border: none;
+            padding: 10px 25px;
+            border-radius: 12px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        .btn:hover {
+            background-color: #ff3385;
+        }
+        .footer {
+            margin-top: 40px;
+            color: #cccccc;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <div class="confirmation">
+        <h2>✅ Booking Confirmed!</h2>
+        <p><strong>Movie:</strong> {{ movie.name }}</p>
+        <p><strong>Tickets:</strong> {{ tickets }}</p>
+        <p><strong>Total Price:</strong> ₹{{ movie.price * tickets }}</p>
+        <a href="{{ url_for('home') }}"><button class="btn">🏠 Back to Home</button></a>
+    </div>
+
+    <div class="footer">
+        🎁 Thanks for choosing Movie Magic!
+    </div>
+</body>
+</html>
