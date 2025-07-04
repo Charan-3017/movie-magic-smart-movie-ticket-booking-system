@@ -4,7 +4,7 @@ import boto3
 import uuid
 
 app = Flask(__name__)
-app.secret_key = '9a4f90b2b6df594f2e16f6c1f3d9e0ab0cd431c0f0176a2544e740c94cb75a0e'
+app.secret_key = ''
 
 dynamodb = boto3.resource('dynamodb', region_name='us-east-1')
 sns = boto3.client('sns', region_name='us-east-1')
@@ -12,7 +12,7 @@ sns = boto3.client('sns', region_name='us-east-1')
 users_table = dynamodb.Table('MovieMagic_Users')
 bookings_table = dynamodb.Table('MovieMagic_Bookings')
 
-SNS_TOPIC_ARN = 'arn:aws:sns:us-east-1:975050316116:MovieTicketNotifications'  # Replace this
+SNS_TOPIC_ARN = ''  # Replace this
 
 # Movie list
 movies = [
