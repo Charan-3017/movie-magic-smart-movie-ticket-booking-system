@@ -85,7 +85,7 @@
       {% for movie in movies %}
       <div class="col-md-4">
         <div class="movie-card">
-          <img src="{{ url_for('static', filename='css/js/images/' + movie.image) }}" alt="{{ movie.name }}" class="w-full h-48 object-cover rounded-t-xl">
+          <img src="{{ url_for('static', filename='static' + movie.image) }}" alt="{{ movie.name }}" class="w-full h-48 object-cover rounded-t-xl">
 
      alt="{{ movie.title }}" 
      class="img-fluid mb-3 rounded" 
