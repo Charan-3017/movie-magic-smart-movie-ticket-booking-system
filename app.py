@@ -15,7 +15,7 @@ bookings_table = dynamodb.Table('MovieMagic_Bookings')
 SNS_TOPIC_ARN = 'arn:aws:sns:us-east-1:841162686181:MovieShows'  # Replace this with your topic ARN
 
 movies = [
-    {"id": 2, "name": "Avengers: Endgame", "time": "6:00 PM", "price": 150, "rating": 4.8, "image": "avengers.jpeg"},
+    {"id": 2, "name": "Avengers: Endgame", "time": "6:00 PM", "price": 150, "rating": 4.8, "image": "ch1.jpeg"},
     {"id": 7, "name": "Leo", "time": "3:30 PM", "price": 180, "rating": 4.7, "image": "leo.jpeg"},
     {"id": 10, "name": "RRR", "time": "1:00 PM", "price": 160, "rating": 4.6, "image": "rrr.jpeg"},
     {"id": 4, "name": "Inception", "time": "5:00 PM", "price": 200, "rating": 4.9, "image": "inception.jpeg"},
