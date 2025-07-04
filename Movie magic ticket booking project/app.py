@@ -12,7 +12,7 @@ sns = boto3.client('sns', region_name='us-east-1')
 users_table = dynamodb.Table('MovieMagic_Users')
 bookings_table = dynamodb.Table('MovieMagic_Bookings')
 
-SNS_TOPIC_ARN = ''  # Replace this
+SNS_TOPIC_ARN = 'arn:aws:sns:us-east-1:841162686181:MovieShows'  # Replace this
 
 # Movie list
 movies = [
